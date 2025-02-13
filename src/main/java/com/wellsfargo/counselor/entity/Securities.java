@@ -4,29 +4,35 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Advisor {
+public class Securities {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long advisorId;
+    private int securityId;
+
+    @ManyToOne
+    @JoinColumn(name = "portfolio_id", nullable = false)
+    private Portfolio portfolio;
 
     @Column(nullable = false)
-    private String firstName;
+    private String name;
 
     @Column(nullable = false)
-    private String lastName;
+    private String category;
 
     @Column(nullable = false)
-    private String address;
+    private LocalDate purchaseDate;
 
     @Column(nullable = false)
-    private String phone;
+    private BigDecimal purchasePrice;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+    @Column(nullable = false)
+    private int quantity;
 }
